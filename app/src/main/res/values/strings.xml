@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Api Integration v2</string>
+    <string name="back">Back</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="latest">Latest News</string>
+    <string name="query">Search Tags</string>
+    <string name="english">English News</string>
+    <string name="danish">Danish News</string>
+    <string name="url">Go to article</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
