@@ -35,8 +35,7 @@ class NewsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
 
@@ -45,12 +44,12 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<TextView>(R.id.headline).text=arguments?.getString("headline")
-        view.findViewById<TextView>(R.id.articleText).text=arguments?.getString("article")
-        if(arguments?.getString("url")==""){
-            view.findViewById<Button>(R.id.articleLink).visibility=GONE
+        view.findViewById<TextView>(R.id.headline).text = arguments?.getString("headline")
+        view.findViewById<TextView>(R.id.articleText).text = arguments?.getString("article")
+        if (arguments?.getString("url") == "") {
+            view.findViewById<Button>(R.id.articleLink).visibility = GONE
         }
-        view.findViewById<Button>(R.id.articleLink).setOnClickListener{
+        view.findViewById<Button>(R.id.articleLink).setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW, Uri.parse(arguments?.getString("url")))
             startActivity(i)
         }
@@ -68,12 +67,11 @@ class NewsFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NewsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        fun newInstance(param1: String, param2: String) = NewsFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_PARAM1, param1)
+                putString(ARG_PARAM2, param2)
             }
+        }
     }
 }

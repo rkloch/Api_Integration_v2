@@ -32,8 +32,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false)
@@ -41,13 +40,13 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.englishBtn).setOnClickListener{
+        view.findViewById<Button>(R.id.englishBtn).setOnClickListener {
             MainActivity.language = "en"
 
             findNavController().navigate(R.id.action_mainFragment_to_menuFragment4)
 
         }
-        view.findViewById<Button>(R.id.swedishBtn).setOnClickListener{
+        view.findViewById<Button>(R.id.swedishBtn).setOnClickListener {
             MainActivity.language = "da"
             findNavController().navigate(R.id.action_mainFragment_to_menuFragment4)
         }
@@ -64,12 +63,11 @@ class MainFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        fun newInstance(param1: String, param2: String) = MainFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_PARAM1, param1)
+                putString(ARG_PARAM2, param2)
             }
+        }
     }
 }

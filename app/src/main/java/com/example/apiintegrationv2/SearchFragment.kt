@@ -48,20 +48,21 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val url =
-            "https://api.currentsapi.services/v1/search?apiKey=uUsfvL9NAP16WDMCiEtHyvUK9UKY2-Jh2y5FjCGCPKtT5n9I&language=" + MainActivity.language + "&keywords="+MenuFragment.searchTag
+            "https://api.currentsapi.services/v1/search?apiKey=uUsfvL9NAP16WDMCiEtHyvUK9UKY2-Jh2y5FjCGCPKtT5n9I&language=" + MainActivity.language + "&keywords=" + MenuFragment.searchTag
         val rq: RequestQueue = Volley.newRequestQueue(context)
         Log.d("robert", url)
 
-        var jsonRequest = JsonObjectRequest(
-            Request.Method.GET,  url, null,
+
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
             { res ->
 
                 val news = res.getJSONArray("news")
-                if(news.length()<1){
+                if (news.length() < 1) {
                     val frag = NewsFragment()
 
 
-                    val bundle: Bundle = Bundle()
+                    val bundle = Bundle()
                     bundle.putString("headline", "Couldn't find any articles")
                     bundle.putString("article", "")
                     bundle.putString("url", "")
@@ -73,7 +74,7 @@ class SearchFragment : Fragment() {
                     val frag = NewsFragment()
 
 
-                    val bundle: Bundle = Bundle()
+                    val bundle = Bundle()
                     bundle.putString("headline", news.getJSONObject(i).getString("title"))
                     bundle.putString("article", news.getJSONObject(i).getString("description"))
                     bundle.putString("url", news.getJSONObject(i).getString("url"))
@@ -81,22 +82,15 @@ class SearchFragment : Fragment() {
                     val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
                     fm.beginTransaction().add(R.id.searchFragmentContainer, frag).commit()
                 }
-                //Log.d("Robert",res.toString())
-                //Log.d("Robert",res.get("url").toString())
 
-                /* vid array loopa igenom*/
-                /*  val jsonArray = res.getJSONArray("url");
-                     for (i in 0 until jsonObject.length()){
-                    Log.d("Alrik",jsonArray.getJSONObject(i).toString())
-                }*/
 
-            } ,
+            },
             { err ->
                 Log.e("Robert", err.toString())
                 val frag = NewsFragment()
 
 
-                val bundle: Bundle = Bundle()
+                val bundle = Bundle()
                 bundle.putString("headline", "Couldn't find any articles")
                 bundle.putString("article", "")
                 bundle.putString("url", "")
@@ -109,32 +103,6 @@ class SearchFragment : Fragment() {
 
         rq.add(jsonRequest)
 
-        /*
-                val json = MainActivity.json
-                val news = json.getJSONArray("news")
-                for (i in 0 until news.length()) {
-                    val frag = NewsFragment()
-
-
-                    val bundle: Bundle = Bundle()
-                    bundle.putString("headline", news.getJSONObject(i).getString("title"))
-                    bundle.putString("article", news.getJSONObject(i).getString("description"))
-                    bundle.putString("url", news.getJSONObject(i).getString("url"))
-                    frag.arguments = bundle
-                    val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
-                    fm.beginTransaction().add(R.id.latestNewsFragContainer, frag).commit()
-                }*/
-
-        /*val frag1 = NewsFragment()
-
-
-        val bundle1 : Bundle = Bundle()
-        bundle1.putString("headline", "tjaba")
-        bundle1.putString("article", "tjabatajbabtjbajtb")
-        bundle1.putString("url", "https//:hej.com")
-        frag1.arguments=bundle1
-
-        fm.beginTransaction().add(R.id.latestNewsFragContainer,frag1).commit()*/
 
     }
 

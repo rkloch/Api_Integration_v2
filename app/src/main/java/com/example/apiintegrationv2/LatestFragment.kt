@@ -11,7 +11,6 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,8 +36,7 @@ class LatestFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_latest, container, false)
@@ -50,64 +48,27 @@ class LatestFragment : Fragment() {
             "https://api.currentsapi.services/v1/latest-news?apiKey=uUsfvL9NAP16WDMCiEtHyvUK9UKY2-Jh2y5FjCGCPKtT5n9I&language=" + MainActivity.language
         val rq: RequestQueue = Volley.newRequestQueue(context)
         Log.d("robert", url)
-        var jsonRequest = JsonObjectRequest(
-            Request.Method.GET,  url, null,
-            { res ->
+        val jsonRequest = JsonObjectRequest(Request.Method.GET, url, null, { res ->
 
-                val news = res.getJSONArray("news")
-                for (i in 0 until news.length()) {
-                    val frag = NewsFragment()
+            val news = res.getJSONArray("news")
+            for (i in 0 until news.length()) {
+                val frag = NewsFragment()
 
 
-                    val bundle: Bundle = Bundle()
-                    bundle.putString("headline", news.getJSONObject(i).getString("title"))
-                    bundle.putString("article", news.getJSONObject(i).getString("description"))
-                    bundle.putString("url", news.getJSONObject(i).getString("url"))
-                    frag.arguments = bundle
-                    val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
-                    fm.beginTransaction().add(R.id.latestNewsFragContainer, frag).commit()
-                }
-                //Log.d("Robert",res.toString())
-                //Log.d("Robert",res.get("url").toString())
+                val bundle = Bundle()
+                bundle.putString("headline", news.getJSONObject(i).getString("title"))
+                bundle.putString("article", news.getJSONObject(i).getString("description"))
+                bundle.putString("url", news.getJSONObject(i).getString("url"))
+                frag.arguments = bundle
+                val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
+                fm.beginTransaction().add(R.id.latestNewsFragContainer, frag).commit()
+            }
 
-                /* vid array loopa igenom*/
-                /*  val jsonArray = res.getJSONArray("url");
-                     for (i in 0 until jsonObject.length()){
-                    Log.d("Alrik",jsonArray.getJSONObject(i).toString())
-                }*/
 
-            } ,
-            { err ->  Log.e("Robert",err.toString()) }
-        )
+        }, { err -> Log.e("Robert", err.toString()) })
 
         rq.add(jsonRequest)
 
-/*
-        val json = MainActivity.json
-        val news = json.getJSONArray("news")
-        for (i in 0 until news.length()) {
-            val frag = NewsFragment()
-
-
-            val bundle: Bundle = Bundle()
-            bundle.putString("headline", news.getJSONObject(i).getString("title"))
-            bundle.putString("article", news.getJSONObject(i).getString("description"))
-            bundle.putString("url", news.getJSONObject(i).getString("url"))
-            frag.arguments = bundle
-            val fm: FragmentManager = (activity as MainActivity).supportFragmentManager
-            fm.beginTransaction().add(R.id.latestNewsFragContainer, frag).commit()
-        }*/
-
-        /*val frag1 = NewsFragment()
-
-
-        val bundle1 : Bundle = Bundle()
-        bundle1.putString("headline", "tjaba")
-        bundle1.putString("article", "tjabatajbabtjbajtb")
-        bundle1.putString("url", "https//:hej.com")
-        frag1.arguments=bundle1
-
-        fm.beginTransaction().add(R.id.latestNewsFragContainer,frag1).commit()*/
 
     }
 
@@ -122,12 +83,11 @@ class LatestFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LatestFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        fun newInstance(param1: String, param2: String) = LatestFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_PARAM1, param1)
+                putString(ARG_PARAM2, param2)
             }
+        }
     }
 }
